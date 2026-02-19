@@ -709,29 +709,93 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Responsive */
+        /* Responsive — Tablet */
         @media (max-width: 768px) {
-            .crew-grid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 0 1.25rem; }
+            .section { padding: 3.5rem 0; }
+            .section-header { margin-bottom: 2rem; }
+
+            .hero { min-height: 85vh; }
+            .hero-content { padding: 0 1.25rem 3rem; }
+            .hero-content h1 { font-size: 2.8rem; }
+
+            .crew-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .crew-card { padding: 1.25rem; }
+
             .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .stat-item { padding: 1.25rem 1rem; }
+            .stat-number { font-size: 2rem; }
+
             .image-row { grid-template-columns: 1fr; }
-            .image-row .img-card { height: 240px; }
+            .image-row .img-card { height: 220px; }
+
             .day-row { grid-template-columns: 1fr; }
-            .day-date { border-right: none; border-bottom: none; padding-bottom: 0; padding-top: 1.5rem; }
-            .day-content { padding-top: 0.5rem; }
+            .day-date { border-right: none; border-bottom: none; padding: 1.25rem 1.25rem 0; }
+            .day-content { padding: 0.5rem 1.25rem 1.25rem; }
+
             .weather-banner { grid-template-columns: 1fr; }
-            .weather-image { min-height: 240px; }
-            .links-grid { grid-template-columns: 1fr; }
-            .top-nav .nav-links { gap: 1rem; }
-            .top-nav .nav-links a { font-size: 0.75rem; }
-            .hero-content { padding-bottom: 3rem; }
-            .accom-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .weather-text { padding: 2rem 1.5rem; }
+            .weather-image { min-height: 200px; }
+
+            .accom-grid { grid-template-columns: 1fr; gap: 1.25rem; }
             .accom-body { padding: 1.5rem; }
             .accom-header { padding: 1.5rem; }
+
+            .links-grid { grid-template-columns: 1fr; }
+
+            .route-stops { flex-direction: column; align-items: stretch; gap: 0; }
+            .route-line { width: 3px; height: 30px; min-width: 3px; margin: 0 auto; }
+            .route-stop { flex-direction: row; gap: 1rem; }
+            .route-dot { margin-bottom: 0; flex-shrink: 0; }
+            .route-stop-name { text-align: left; }
+            .route-stop-detail { text-align: left; }
+
+            .map-wrapper iframe { height: 300px; }
+
+            .top-nav .nav-links { gap: 1rem; }
+            .top-nav .nav-links a { font-size: 0.75rem; }
         }
 
+        /* Responsive — Mobile */
         @media (max-width: 480px) {
-            .hero-meta { flex-direction: column; gap: 0.5rem; }
+            .hero { min-height: 75vh; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-label { font-size: 0.65rem; }
+            .hero-meta { flex-direction: column; gap: 0.5rem; font-size: 0.85rem; }
+
+            .top-nav { padding: 0 1rem; }
             .top-nav .nav-links { display: none; }
+
+            .section-title { font-size: 1.5rem; }
+            .section-desc { font-size: 0.95rem; }
+
+            .crew-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .crew-card { padding: 1rem; }
+            .crew-avatar { width: 48px; height: 48px; font-size: 1rem; }
+
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .stat-number { font-size: 1.6rem; }
+            .stat-label { font-size: 0.7rem; }
+
+            .image-row .img-card { height: 180px; }
+
+            .day-title { font-size: 0.95rem; }
+            .day-desc { font-size: 0.85rem; }
+            .day-dinner { font-size: 0.75rem; }
+
+            .weather-text { padding: 1.5rem; }
+            .weather-text .section-title { font-size: 1.3rem; }
+            .weather-links { flex-direction: column; }
+            .weather-btn { text-align: center; }
+
+            .accom-header h3 { font-size: 1.2rem; }
+            .accom-body { padding: 1.25rem; }
+            .accom-links { flex-direction: column; }
+            .accom-btn { text-align: center; }
+
+            .map-wrapper iframe { height: 250px; }
+
+            .link-card { padding: 1.25rem; }
         }
     </style>
 </head>
