@@ -320,6 +320,33 @@
             line-height: 1.8;
         }
 
+        /* Map */
+        .map-wrapper {
+            margin-top: 3rem;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 400px;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+        }
+
+        .map-caption {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+        .map-caption a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .map-caption a:hover {
+            text-decoration: underline;
+        }
+
         /* Itinerary */
         .itinerary-grid {
             display: grid;
@@ -368,6 +395,17 @@
             color: var(--gray-600);
             font-size: 0.9rem;
             line-height: 1.7;
+        }
+
+        .day-dinner {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.3rem 0.75rem;
+            background: var(--blue-light);
+            color: var(--blue);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 4px;
         }
 
         /* Weather */
@@ -442,25 +480,111 @@
         }
 
         /* Accommodation */
-        .tbd-box {
+        .accom-card {
             border: 1px solid var(--gray-200);
             border-radius: var(--radius);
-            padding: 3rem;
-            text-align: center;
-            background: var(--off-white);
+            overflow: hidden;
+            background: var(--white);
         }
 
-        .tbd-box p {
+        .accom-header {
+            background: var(--navy);
+            color: white;
+            padding: 2rem 2.5rem;
+        }
+
+        .accom-header h3 {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.3rem;
-            color: var(--navy);
+            font-size: 1.5rem;
+            font-weight: 400;
         }
 
-        .tbd-box span {
-            color: var(--gray-400);
+        .accom-header p {
+            opacity: 0.7;
             font-size: 0.9rem;
-            display: block;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .accom-body {
+            padding: 2rem 2.5rem;
+        }
+
+        .accom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .accom-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .accom-item .accom-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gray-400);
+        }
+
+        .accom-item .accom-value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .accom-item .accom-detail {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        .accom-divider {
+            border: none;
+            border-top: 1px solid var(--gray-200);
+            margin: 1.5rem 0;
+        }
+
+        .accom-note {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        .accom-note strong {
+            color: var(--text);
+        }
+
+        .accom-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .accom-btn {
+            display: inline-block;
+            padding: 0.55rem 1.25rem;
+            background: var(--blue);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .accom-btn:hover { opacity: 0.85; }
+
+        .accom-btn--outline {
+            background: transparent;
+            border: 1px solid var(--gray-200);
+            color: var(--text);
+        }
+
+        .accom-btn--outline:hover {
+            background: var(--off-white);
+            opacity: 1;
         }
 
         /* Links */
@@ -543,6 +667,9 @@
             .top-nav .nav-links { gap: 1rem; }
             .top-nav .nav-links a { font-size: 0.75rem; }
             .hero-content { padding-bottom: 3rem; }
+            .accom-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .accom-body { padding: 1.5rem; }
+            .accom-header { padding: 1.5rem; }
         }
 
         @media (max-width: 480px) {
@@ -559,10 +686,11 @@
     <div class="nav-links">
         <a href="#crew">Crew</a>
         <a href="#resort">Resort</a>
+        <a href="#route">Resrutt</a>
         <a href="#itinerary">Schema</a>
-        <a href="#weather">Weather</a>
+        <a href="#weather">Väder</a>
         <a href="#accommodation">Boende</a>
-        <a href="#links">Links</a>
+        <a href="#links">Länkar</a>
     </div>
 </nav>
 
@@ -573,9 +701,9 @@
         <div class="hero-label">Ski Trip 2026</div>
         <h1>Vemdalen</h1>
         <div class="hero-meta">
-            <span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> 1 &ndash; 8 mars 2026</span>
+            <span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> 22 feb &ndash; 1 mars 2026</span>
             <span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg> 8 personer</span>
-            <span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Vemdalen, Härjedalen</span>
+            <span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Vemdalsskalet, Härjedalen</span>
         </div>
     </div>
 </header>
@@ -671,13 +799,35 @@
         </div>
 
         <p class="resort-text">
-            Vemdalen har tre skidområden &mdash; <strong>Vemdalsskalet</strong>, <strong>Björnrike</strong> och <strong>Klövsjö/Storhogna</strong> &mdash; samtliga på samma liftkort. Nytt för säsongen är <strong>Hovde Syd</strong>, ett helt nytt skidområde på Vemdalsskalet som öppnade julen 2025. Utsedd till "Årets Fjällanläggning" av svenska resenärer.
+            Vemdalen har tre skidområden &mdash; <strong>Vemdalsskalet</strong>, <strong>Björnrike</strong> och <strong>Klövsjö/Storhogna</strong> &mdash; samtliga på samma liftkort. Nytt för säsongen är <strong>Hovde Syd</strong>, ett helt nytt skidområde på Vemdalsskalet som öppnade julen 2025. Utsedd till &ldquo;Årets Fjällanläggning&rdquo; av svenska resenärer.
         </p>
     </div>
 </section>
 
+<!-- Route / Map -->
+<section class="section" id="route">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Resrutt</div>
+            <h2 class="section-title">Stockholm &rarr; Gävle &rarr; Vemdalen</h2>
+            <p class="section-desc">Ca 4,5 timmar med stopp vid IKEA Gävle för lunch kl 11:00.</p>
+        </div>
+        <div class="map-wrapper">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2000000!2d15.5!3d62.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x465f763119ba7235%3A0xa80d27d3679d7766!2sStockholm!3m2!1d59.3293235!2d18.0685808!4m5!1s0x466e034897e6a883%3A0x3a6e0bfc0e498a91!2sIKEA%20G%C3%A4vle%2C%20G%C3%A4vle!3m2!1d60.6986407!2d17.1302285!4m5!1s0x466c1f97a40f7e05%3A0xc2d43fa1c18b853!2sVemdalen!3m2!1d62.4500961!2d13.8568889!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <p class="map-caption">
+                <a href="https://www.google.com/maps/dir/Stockholm/IKEA+G%C3%A4vle/Vemdalen" target="_blank">Öppna i Google Maps &rarr;</a>
+            </p>
+        </div>
+    </div>
+</section>
+
 <!-- Itinerary -->
-<section class="section" id="itinerary">
+<section class="section section--gray" id="itinerary">
     <div class="container">
         <div class="section-header">
             <div class="section-label">Dag för dag</div>
@@ -686,59 +836,65 @@
         </div>
         <div class="itinerary-grid">
             <div class="day-row">
-                <div class="day-date">Sön 1 mars</div>
+                <div class="day-date">Sön 22 feb</div>
                 <div class="day-content">
                     <div class="day-title">Bilresa Stockholm &rarr; Vemdalen</div>
-                    <div class="day-desc">Avfärd från Stockholm på förmiddagen. Lunchstopp i Gävle kl 11:00. Framme i Vemdalen på eftermiddagen &mdash; checka in och handla.</div>
+                    <div class="day-desc">Avfärd från Stockholm på förmiddagen. Lunchstopp vid IKEA Gävle kl 11:00. Framme i Vemdalen på eftermiddagen. Incheckning från kl 17:00.</div>
                 </div>
             </div>
             <div class="day-row">
-                <div class="day-date">Mån 2 mars</div>
+                <div class="day-date">Mån 23 feb</div>
                 <div class="day-content">
                     <div class="day-title">Första skiddagen</div>
                     <div class="day-desc">Hämta ut hyrutrustning och liftkort. Ut i backarna! Testa Vemdalsskalet och nya Hovde Syd.</div>
+                    <div class="day-dinner">Middag hos Anders & Ulrica</div>
                 </div>
             </div>
             <div class="day-row">
-                <div class="day-date">Tis 3 mars</div>
+                <div class="day-date">Tis 24 feb</div>
                 <div class="day-content">
                     <div class="day-title">Skidåkning &mdash; Björnrike</div>
                     <div class="day-desc">Utforska Björnrike med Snow Park och Fun Ride. Après-ski på eftermiddagen.</div>
+                    <div class="day-dinner">Middag hos Rebecca & Richard</div>
                 </div>
             </div>
             <div class="day-row">
-                <div class="day-date">Ons 4 mars</div>
+                <div class="day-date">Ons 25 feb</div>
                 <div class="day-content">
                     <div class="day-title">Skidåkning / Vilodag</div>
-                    <div class="day-desc">Åk skidor eller ta det lugnt. Längdskidåkning, skotersafari eller bara vila. Middag på <strong>Storhögna Bistro kl 18:15</strong>.</div>
+                    <div class="day-desc">Åk skidor eller ta det lugnt. Längdskidåkning, skotersafari eller bara vila.</div>
+                    <div class="day-dinner">Middag: Storhögna Bistro kl 18:15</div>
                 </div>
             </div>
             <div class="day-row">
-                <div class="day-date">Tor 5 mars</div>
+                <div class="day-date">Tor 26 feb</div>
                 <div class="day-content">
                     <div class="day-title">Skidåkning &mdash; Klövsjö & Storhogna</div>
                     <div class="day-desc">Det lugnare skidområdet med fantastisk utsikt och varierad terräng.</div>
+                    <div class="day-dinner">Middag hos Anders & Ulrica</div>
                 </div>
             </div>
             <div class="day-row">
-                <div class="day-date">Fre 6 mars</div>
+                <div class="day-date">Fre 27 feb</div>
                 <div class="day-content">
                     <div class="day-title">Skidåkning</div>
-                    <div class="day-desc">Tillbaka till favoritområdet. Njut av middag på en av Vemdalens 35+ restauranger.</div>
+                    <div class="day-desc">Tillbaka till favoritområdet för fler åk.</div>
+                    <div class="day-dinner">Middag hos Rebecca & Richard</div>
                 </div>
             </div>
             <div class="day-row">
-                <div class="day-date">Lör 7 mars</div>
+                <div class="day-date">Lör 28 feb</div>
                 <div class="day-content">
                     <div class="day-title">Sista skiddagen</div>
                     <div class="day-desc">Sista chansen på backarna &mdash; gör det bästa av det! Packa ihop på kvällen.</div>
+                    <div class="day-dinner">Middag: TBD</div>
                 </div>
             </div>
             <div class="day-row">
-                <div class="day-date">Sön 8 mars</div>
+                <div class="day-date">Sön 1 mars</div>
                 <div class="day-content">
                     <div class="day-title">Hemresa</div>
-                    <div class="day-desc">Checka ut och kör tillbaka till Stockholm. Hemma på kvällen.</div>
+                    <div class="day-desc">Utcheckning senast kl 10:00. Lämna nycklar i Check-in 32, box C. Kör tillbaka till Stockholm.</div>
                 </div>
             </div>
         </div>
@@ -746,13 +902,13 @@
 </section>
 
 <!-- Weather -->
-<section class="section section--gray" id="weather">
+<section class="section" id="weather">
     <div class="container">
         <div class="weather-banner">
             <div class="weather-text">
                 <div class="section-label">Väder</div>
                 <h2 class="section-title">Väderprognos</h2>
-                <p>Genomsnittlig temperatur i mars: <strong>-5&deg;C till -10&deg;C</strong>. Snöfall per säsong: ca 198 cm. Mars brukar ha utmärkta snöförhållanden.</p>
+                <p>Genomsnittlig temperatur i februari/mars: <strong>-5&deg;C till -10&deg;C</strong>. Snöfall per säsong: ca 198 cm. Brukar vara utmärkta snöförhållanden.</p>
                 <div class="weather-links">
                     <a href="https://www.yr.no/en/forecast/daily-table/2-2662710/Sweden/G%C3%A4vleborg/G%C3%A4vle%20kommun/Vemdalen" target="_blank" class="weather-btn">yr.no prognos</a>
                     <a href="https://www.skistar.com/sv/vara-skidorter/vemdalen/vader-och-backar/" target="_blank" class="weather-btn weather-btn--outline">SkiStar backstatus</a>
@@ -764,26 +920,64 @@
 </section>
 
 <!-- Accommodation -->
-<section class="section" id="accommodation">
+<section class="section section--gray" id="accommodation">
     <div class="container">
         <div class="section-header">
             <div class="section-label">Boende</div>
-            <h2 class="section-title">Boende i Vemdalen</h2>
+            <h2 class="section-title">Boende i Vemdalsskalet</h2>
         </div>
-        <div class="tbd-box">
-            <p>Bekräftas inom kort</p>
-            <span>Detaljer läggs in här så snart bokningen är klar.</span>
+
+        <div class="accom-card">
+            <div class="accom-header">
+                <h3>Tysta Stigen 38F</h3>
+                <p>KF295F &middot; Tallhöjden, Vemdalsskalet</p>
+            </div>
+            <div class="accom-body">
+                <div class="accom-grid">
+                    <div class="accom-item">
+                        <span class="accom-label">Incheckning</span>
+                        <span class="accom-value">Söndag 22 februari</span>
+                        <span class="accom-detail">Från kl 17:00</span>
+                    </div>
+                    <div class="accom-item">
+                        <span class="accom-label">Utcheckning</span>
+                        <span class="accom-value">Söndag 1 mars</span>
+                        <span class="accom-detail">Senast kl 10:00</span>
+                    </div>
+                    <div class="accom-item">
+                        <span class="accom-label">Nyckel &mdash; hämta</span>
+                        <span class="accom-value">Check-in 32, box C</span>
+                        <span class="accom-detail">Kod: 699627#</span>
+                    </div>
+                    <div class="accom-item">
+                        <span class="accom-label">Nyckel &mdash; lämna</span>
+                        <span class="accom-value">Check-in 32, box C</span>
+                        <span class="accom-detail">Kod: *4408#</span>
+                    </div>
+                </div>
+
+                <hr class="accom-divider">
+
+                <div class="accom-note">
+                    <strong>Bra att veta:</strong> Nattro mellan 23:00&ndash;07:00. Rökning och husdjur ej tillåtet. Elbil får <strong>inte</strong> laddas i boendets uttag &mdash; använd dedikerade laddstationer.
+                </div>
+
+                <div class="accom-links">
+                    <a href="https://l.skistar.com/r/hw3pnc/7ew4ub" target="_blank" class="accom-btn">Visa boende</a>
+                    <a href="https://www.skistar.com/map/lk/29" target="_blank" class="accom-btn accom-btn--outline">Karta till Check-in 32</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- Links -->
-<section class="section section--gray" id="links">
+<section class="section" id="links">
     <div class="container">
         <div class="section-header">
             <div class="section-label">Resurser</div>
             <h2 class="section-title">Bra länkar</h2>
-            <p class="section-desc">Allt du behöver samlade på ett ställe.</p>
+            <p class="section-desc">Allt du behöver samlat på ett ställe.</p>
         </div>
         <div class="links-grid">
             <a href="https://www.skistar.com/sv/vara-skidorter/vemdalen/" target="_blank" class="link-card">
@@ -800,11 +994,11 @@
                     <div class="link-desc">Se vilka backar som är öppna</div>
                 </div>
             </a>
-            <a href="https://www.google.com/maps/dir/Stockholm/Vemdalen" target="_blank" class="link-card">
+            <a href="https://www.google.com/maps/dir/Stockholm/IKEA+G%C3%A4vle/Vemdalen" target="_blank" class="link-card">
                 <div class="link-icon">&#128506;</div>
                 <div>
                     <div class="link-title">Körväg</div>
-                    <div class="link-desc">Stockholm &rarr; Gävle &rarr; Vemdalen</div>
+                    <div class="link-desc">Stockholm &rarr; IKEA Gävle &rarr; Vemdalen</div>
                 </div>
             </a>
             <a href="https://www.skistar.com/sv/vara-skidorter/vemdalen/boka-skiduthyrning/" target="_blank" class="link-card">
