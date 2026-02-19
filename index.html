@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vemdalen 2026 — Ski Trip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --blue: #1a3a5c;
+            --light-blue: #4a90d9;
+            --ice: #e8f1fa;
+            --snow: #f5f8fc;
+            --white: #ffffff;
+            --dark: #1c1c2e;
+            --accent: #ff6b35;
+            --gray: #6b7280;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--dark);
+            background: var(--snow);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a3a5c 0%, #2d6cb4 50%, #4a90d9 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1551524559-8af4e6624178?w=1600&q=80') center/cover;
+            opacity: 0.3;
+        }
+
+        .snowflakes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-content .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content .dates {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-weight: 600;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 1rem;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            animation: bounce 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        /* Crew */
+        .crew-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .crew-member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .crew-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--light-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(74,144,217,0.3);
+        }
+
+        .crew-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Itinerary */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--light-blue), var(--blue));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--light-blue);
+            border: 3px solid var(--white);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--light-blue);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--light-blue);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin: 0.25rem 0;
+        }
+
+        .timeline-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Resort Info */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .info-card .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--light-blue);
+        }
+
+        .info-card .label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Weather */
+        .weather-section {
+            background: linear-gradient(135deg, var(--blue), var(--light-blue));
+            border-radius: 16px;
+            padding: 2.5rem;
+            color: white;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .weather-section .section-title {
+            color: white;
+        }
+
+        .weather-section .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .weather-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s;
+        }
+
+        .weather-link:hover {
+            background: rgba(255,255,255,0.35);
+        }
+
+        /* Image gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        /* Packing / links */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--white);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .link-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: var(--ice);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .link-card .link-title {
+            font-weight: 600;
+        }
+
+        .link-card .link-desc {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Accommodation placeholder */
+        .tbd-box {
+            background: var(--ice);
+            border: 2px dashed var(--light-blue);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--blue);
+        }
+
+        .tbd-box p {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .tbd-box span {
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(26, 58, 92, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            transform: translateY(-100%);
+            transition: transform 0.3s;
+        }
+
+        nav.visible {
+            transform: translateY(0);
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            section { padding: 3rem 1rem; }
+            .info-cards { grid-template-columns: repeat(2, 1fr); }
+            .gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <a href="#crew">Crew</a>
+    <a href="#resort">Resort</a>
+    <a href="#itinerary">Itinerary</a>
+    <a href="#weather">Weather</a>
+    <a href="#accommodation">Stay</a>
+    <a href="#links">Links</a>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="snowflakes" id="snowflakes"></div>
+    <div class="hero-content">
+        <h1>Vemdalen 2026</h1>
+        <p class="subtitle">A week of skiing, good food & great company</p>
+        <div class="dates">1 — 8 March 2026</div>
+    </div>
+    <div class="scroll-hint">Scroll down &#8595;</div>
+</header>
+
+<!-- Crew -->
+<section id="crew">
+    <h2 class="section-title">The Crew</h2>
+    <p class="section-subtitle">8 people, one week, endless runs</p>
+    <div class="crew-grid">
+        <div class="crew-member">
+            <div class="crew-avatar">A</div>
+            <span class="crew-name">Anders</span>
+        </div>
+        <div class="crew-member">
+            <div class="crew-avatar" style="background:#e06c75;">R</div>
+            <span class="crew-name">Rebecca</span>
+        </div>
+        <div class="crew-member">
+            <div class="crew-avatar" style="background:#61afef;">R</div>
+            <span class="crew-name">Richard</span>
+        </div>
+        <div class="crew-member">
+            <div class="crew-avatar" style="background:#98c379;">A</div>
+            <span class="crew-name">Axel</span>
+        </div>
+        <div class="crew-member">
+            <div class="crew-avatar" style="background:#c678dd;">I</div>
+            <span class="crew-name">Ivar</span>
+        </div>
+        <div class="crew-member">
+            <div class="crew-avatar" style="background:#d19a66;">U</div>
+            <span class="crew-name">Ulrica</span>
+        </div>
+        <div class="crew-member">
+            <div class="crew-avatar" style="background:#56b6c2;">E</div>
+            <span class="crew-name">Elise</span>
+        </div>
+        <div class="crew-member">
+            <div class="crew-avatar" style="background:#be5046;">E</div>
+            <span class="crew-name">Elsa</span>
+        </div>
+    </div>
+</section>
+
+<!-- Resort Info -->
+<section id="resort">
+    <h2 class="section-title">Vemdalen Ski Resort</h2>
+    <p class="section-subtitle">Award-winning mountain resort in Härjedalen — "Årets Fjällanläggning"</p>
+    <div class="info-cards">
+        <div class="info-card">
+            <div class="number">62</div>
+            <div class="label">Slopes</div>
+        </div>
+        <div class="info-card">
+            <div class="number">44</div>
+            <div class="label">Lifts</div>
+        </div>
+        <div class="info-card">
+            <div class="number">470m</div>
+            <div class="label">Vertical drop</div>
+        </div>
+        <div class="info-card">
+            <div class="number">155km</div>
+            <div class="label">Cross-country trails</div>
+        </div>
+    </div>
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?w=600&q=80" alt="Ski slopes" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Mountain panorama" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=600&q=80" alt="Skiing in powder snow" loading="lazy">
+    </div>
+    <p style="margin-top: 1.5rem; color: var(--gray); font-size: 0.95rem;">
+        Vemdalen has three ski areas — <strong>Vemdalsskalet</strong>, <strong>Björnrike</strong> and <strong>Klövsjö/Storhogna</strong> — all covered by a single lift pass. New for this season: <strong>Hovde Syd</strong>, a brand new area on Vemdalsskalet opened Christmas 2025.
+    </p>
+</section>
+
+<!-- Itinerary -->
+<section id="itinerary">
+    <h2 class="section-title">Itinerary</h2>
+    <p class="section-subtitle">The plan for the week</p>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-date">Sunday 1 March</div>
+            <div class="timeline-title">Drive Stockholm &rarr; Vemdalen</div>
+            <div class="timeline-desc">Departure from Stockholm in the morning. Lunch stop in Gävle at 11:00. Arrive in Vemdalen in the afternoon — settle in and stock up on groceries.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">Monday 2 March</div>
+            <div class="timeline-title">First day on the slopes</div>
+            <div class="timeline-desc">Pick up any rental gear and lift passes. Hit the slopes! Explore Vemdalsskalet and the brand new Hovde Syd area.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">Tuesday 3 March</div>
+            <div class="timeline-title">Skiing — Björnrike</div>
+            <div class="timeline-desc">Check out the Björnrike area. Great for all levels, with Snow Park and Fun Ride. Après-ski in the afternoon.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">Wednesday 4 March</div>
+            <div class="timeline-title">Skiing / Rest day</div>
+            <div class="timeline-desc">Ski or take a rest day. Options: cross-country skiing on the 155 km trail network, snowmobile tour, or just relax.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">Thursday 5 March</div>
+            <div class="timeline-title">Skiing — Klövsjö & Storhogna</div>
+            <div class="timeline-desc">Explore the quieter Klövsjö and Storhogna area. Beautiful views and varied terrain.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">Friday 6 March</div>
+            <div class="timeline-title">Skiing</div>
+            <div class="timeline-desc">Back to your favourite area for more runs. Enjoy dinner at one of Vemdalen's 35+ restaurants.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">Saturday 7 March</div>
+            <div class="timeline-title">Last day of skiing</div>
+            <div class="timeline-desc">Final day on the slopes — make it count! Pack up in the evening.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">Sunday 8 March</div>
+            <div class="timeline-title">Drive home</div>
+            <div class="timeline-desc">Check out and drive back to Stockholm. Arrive in the evening.</div>
+        </div>
+    </div>
+</section>
+
+<!-- Weather -->
+<section id="weather" style="max-width: 1000px;">
+    <div class="weather-section">
+        <h2 class="section-title">Weather Forecast</h2>
+        <p class="section-subtitle">Check the latest conditions before we go</p>
+        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Average March temperature: <strong>-5°C to -10°C</strong></p>
+        <p style="font-size: 0.95rem; opacity: 0.85;">Typical snowfall: ~198 cm per season. March usually has great snow conditions.</p>
+        <a href="https://www.yr.no/en/forecast/daily-table/2-2662710/Sweden/G%C3%A4vleborg/G%C3%A4vle%20kommun/Vemdalen" target="_blank" class="weather-link">
+            View full forecast on yr.no &rarr;
+        </a>
+        <br>
+        <a href="https://www.skistar.com/sv/vara-skidorter/vemdalen/vader-och-backar/" target="_blank" class="weather-link">
+            SkiStar slope status &rarr;
+        </a>
+    </div>
+</section>
+
+<!-- Accommodation -->
+<section id="accommodation">
+    <h2 class="section-title">Accommodation</h2>
+    <p class="section-subtitle">Where we're staying</p>
+    <div class="tbd-box">
+        <p>To be confirmed</p>
+        <span>Details will be added here once the booking is finalized.</span>
+    </div>
+</section>
+
+<!-- Useful links -->
+<section id="links">
+    <h2 class="section-title">Useful Links</h2>
+    <p class="section-subtitle">Everything you need in one place</p>
+    <div class="links-grid">
+        <a href="https://www.skistar.com/sv/vara-skidorter/vemdalen/" target="_blank" class="link-card">
+            <div class="link-icon">⛷</div>
+            <div>
+                <div class="link-title">SkiStar Vemdalen</div>
+                <div class="link-desc">Lift passes, slopes & ski school</div>
+            </div>
+        </a>
+        <a href="https://www.skistar.com/sv/vara-skidorter/vemdalen/vader-och-backar/" target="_blank" class="link-card">
+            <div class="link-icon">🏔</div>
+            <div>
+                <div class="link-title">Slope Map & Status</div>
+                <div class="link-desc">See which runs are open</div>
+            </div>
+        </a>
+        <a href="https://www.google.com/maps/dir/Stockholm/Vemdalen" target="_blank" class="link-card">
+            <div class="link-icon">🗺</div>
+            <div>
+                <div class="link-title">Driving Route</div>
+                <div class="link-desc">Stockholm → Gävle → Vemdalen</div>
+            </div>
+        </a>
+        <a href="https://www.skistar.com/sv/vara-skidorter/vemdalen/boka-skiduthyrning/" target="_blank" class="link-card">
+            <div class="link-icon">🎿</div>
+            <div>
+                <div class="link-title">Ski Rental</div>
+                <div class="link-desc">Book gear at SkiStar</div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<footer>
+    <p>Vemdalen 2026 — See you on the slopes!</p>
+</footer>
+
+<script>
+    // Sticky nav on scroll
+    const nav = document.getElementById('nav');
+    const hero = document.querySelector('.hero');
+    const observer = new IntersectionObserver(([entry]) => {
+        nav.classList.toggle('visible', !entry.isIntersecting);
+    }, { threshold: 0.1 });
+    observer.observe(hero);
+
+    // Snowflakes
+    const container = document.getElementById('snowflakes');
+    for (let i = 0; i < 40; i++) {
+        const flake = document.createElement('div');
+        flake.classList.add('snowflake');
+        flake.textContent = '❄';
+        flake.style.left = Math.random() * 100 + '%';
+        flake.style.fontSize = (Math.random() * 1 + 0.5) + 'rem';
+        flake.style.animationDuration = (Math.random() * 8 + 5) + 's';
+        flake.style.animationDelay = (Math.random() * 10) + 's';
+        flake.style.opacity = Math.random() * 0.7 + 0.3;
+        container.appendChild(flake);
+    }
+</script>
+
+</body>
+</html>
